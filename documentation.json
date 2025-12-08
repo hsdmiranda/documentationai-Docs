@@ -72,5 +72,7 @@
         ]
       }
     ]
-  }
+  },
+  "logo-light": "https://blob-cdn.documentation.ai/org-61af6bde-3564-4dc4-818c-bdbfd0a57e56/doc-15c2d46f-be44-4c65-b394-bb4fc2c14abf/1765196936067-dfpzieewpou-blogo.png?q=85&fm=auto&auto=compress%2Cformat",
+  "logo-dark": "https://blob-cdn.documentation.ai/org-61af6bde-3564-4dc4-818c-bdbfd0a57e56/doc-15c2d46f-be44-4c65-b394-bb4fc2c14abf/1765196948645-bqkm5j4buql-bookengo_square_dark.png?q=85&fm=auto&auto=compress%2Cformat"
 }
