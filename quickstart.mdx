@@ -1,0 +1,154 @@
+---
+title: Quickstart Guide
+description: Get started with Bookengo quickly by setting up your account and making your first reservation to experience seamless shuttle management.
+---
+
+## Get Started in Minutes
+
+Bookengo makes shuttle reservations effortless for hotel managers. Follow these steps to create your account, configure your hotel details, and book your first shuttle. Within minutes, you manage guest transportation seamlessly.
+
+<Callout kind="tip">
+  Prepare your hotel address and shuttle provider details before starting. This speeds up setup.
+</Callout>
+
+## Create Your Account
+
+Sign up takes under 2 minutes. Use your business email for verification.
+
+<Steps>
+  <Step title="Visit Bookengo" icon="globe">
+    Navigate to [app.bookengo.com](https://app.bookengo.com) and click **Sign Up**.
+
+    Select **Hotel Manager** as your role.
+  </Step>
+
+  <Step title="Enter Details" icon="user">
+    Provide your name, hotel name (e.g., "Grand Plaza Hotel"), and business email.
+
+    Create a strong password and agree to terms.
+  </Step>
+
+  <Step title="Verify Email" icon="mail">
+    Check your inbox for the verification link. Click it to activate your account.
+
+    Log in immediately.
+  </Step>
+</Steps>
+
+## Initial Platform Setup
+
+Configure your hotel and shuttles post-login.
+
+<Tabs>
+  <Tab title="Hotel Profile" icon="building">
+    Go to **Settings > Hotel Profile**.
+
+    Enter address: `123 Marina Bay, Miami, FL 33139`.
+
+    Add contact: `+1-555-0123`, `manager@grandplazahotel.com`.
+
+    Save changes.
+  </Tab>
+
+  <Tab title="Shuttle Providers" icon="truck">
+    Navigate to **Settings > Providers**.
+
+    Add provider: Name `ShuttlePro`, Fleet size `5`, Rates `{ "standard": 25, "luxury": 45 }`.
+
+    Upload provider logo if available.
+  </Tab>
+</Tabs>
+
+<Callout kind="info">
+  Enable notifications in **Settings > Alerts** for real-time reservation updates.
+</Callout>
+
+## Place Your First Reservation
+
+Book a shuttle for a guest arriving today.
+
+<Steps>
+  <Step title="New Reservation" icon="plus">
+    Click **New Reservation** on the dashboard.
+  </Step>
+
+  <Step title="Guest Details" icon="users">
+    Enter: Guest `John Doe`, Pickup `Miami Airport (MIA)`, Dropoff `Grand Plaza Hotel`, Time `2024-10-15T14:00:00Z`, Passengers `2`.
+  </Step>
+
+  <Step title="Select Provider" icon="truck">
+    Choose `ShuttlePro`, Rate `standard`.
+
+    Review total: `$50.00`.
+  </Step>
+
+  <Step title="Confirm" icon="check-circle">
+    Add notes: `Flight AA123, baggage claim`.
+
+    Click **Book Now**. Receive confirmation email.
+  </Step>
+</Steps>
+
+For programmatic booking, use this API snippet:
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+  const response = await fetch('https://api.bookengo.com/v1/reservations', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      guestName: 'John Doe',
+      pickup: 'Miami Airport (MIA)',
+      dropoff: 'Grand Plaza Hotel',
+      time: '2024-10-15T14:00:00Z',
+      passengers: 2
+    })
+  });
+  ```
+  ```python
+  import requests
+
+  response = requests.post(
+      'https://api.bookengo.com/v1/reservations',
+      headers={
+          'Authorization': 'Bearer YOUR_API_KEY',
+          'Content-Type': 'application/json'
+      },
+      json={
+          'guestName': 'John Doe',
+          'pickup': 'Miami Airport (MIA)',
+          'dropoff': 'Grand Plaza Hotel',
+          'time': '2024-10-15T14:00:00Z',
+          'passengers': 2
+      }
+  )
+  ```
+</CodeGroup>
+
+## Next Steps
+
+Explore more features to optimize your operations.
+
+<Columns cols={3}>
+  <Card title="Dashboard Overview" icon="activity" href="/docs/dashboard">
+    Monitor live reservations and analytics.
+  </Card>
+
+  <Card title="Manage Fleet" icon="truck" href="/docs/fleet">
+    Track shuttles and drivers in real-time.
+  </Card>
+
+  <Card title="Guest Portal" icon="users" href="/docs/guest-portal">
+    Share booking links with guests.
+  </Card>
+</Columns>
+
+<Expandable title="Troubleshooting Common Issues" default-open="false">
+
+- **Email not received?** Check spam folder or resend from **Account > Security**.
+- **Provider not listed?** Contact support via **Help > Submit Ticket**.
+
+</Expandable>

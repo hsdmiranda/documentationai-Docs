@@ -1,0 +1,126 @@
+---
+title: Configuration and Settings
+description: Customize Bookengo's settings to align with your hotel's specific needs, including notifications and operational preferences for better efficiency.
+---
+
+## Overview
+
+Configure Bookengo to match your hotel's operations, from user permissions to notification preferences and reservation workflows. Access the settings dashboard from your Bookengo account menu. Tailor these options to improve guest experiences and staff efficiency.
+
+<Columns cols={3}>
+  <Card title="Account Settings" icon="users" href="#account-settings">
+    Manage users and permissions for your team.
+  </Card>
+  <Card title="Notifications" icon="bell" href="#notifications">
+    Set up alerts for reservations and shuttles.
+  </Card>
+  <Card title="Workflows" icon="settings" href="#workflows">
+    Customize reservation approval processes.
+  </Card>
+</Columns>
+
+## Account and User Settings
+
+Manage your hotel's staff accounts and roles to control access to shuttle reservations.
+
+<Steps>
+  <Step title="Access Settings" icon="settings">
+    Navigate to **Account > Users** in the dashboard.
+  </Step>
+  <Step title="Add User" icon="user-plus">
+    Click **Add User** and enter details like name, email, and role (`admin`, `manager`, or `driver`).
+  </Step>
+  <Step title="Set Permissions" icon="shield">
+    Assign permissions such as `view_reservations`, `edit_shuttles`, or `manage_notifications`.
+  </Step>
+  <Step title="Save Changes" icon="check-circle">
+    Review and save. New users receive a welcome email.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Use role-based access to prevent drivers from editing reservation workflows.
+</Callout>
+
+## Notification Configurations
+
+Set up notifications to keep your team informed about new reservations, shuttle delays, or cancellations.
+
+<Tabs>
+  <Tab title="Email" icon="mail">
+    Enable email alerts for managers.
+
+    ```json
+    {
+      "enabled": true,
+      "recipients": ["manager@grandhotel.com", "ops@grandhotel.com"],
+      "events": ["new_reservation", "shuttle_delayed"]
+    }
+    ```
+  </Tab>
+  <Tab title="SMS" icon="phone">
+    Configure SMS for urgent driver notifications.
+
+    ```json
+    {
+      "enabled": true,
+      "provider": "twilio",
+      "phoneNumbers": ["+15551234567"],
+      "events": ["shuttle_ready", "guest_no_show"]
+    }
+    ```
+  </Tab>
+  <Tab title="Push" icon="smartphone">
+    Use push notifications for mobile app users.
+
+    ```json
+    {
+      "enabled": true,
+      "events": ["reservation_confirmed", "shuttle_departing"]
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Customizing Reservation Workflows
+
+Adapt the reservation process to your hotel's needs, such as requiring manager approval for large groups.
+
+<ExpandableGroup>
+  <Expandable title="Basic Workflow" default-open="true">
+    Standard flow: Guest books → Auto-confirm → Assign shuttle.
+
+    ```mermaid
+    graph TD
+        A[Guest Books] --> B[Auto-Confirm]
+        B --> C[Assign Shuttle]
+        C --> D[Notify Driver]
+    ```
+  </Expandable>
+  <Expandable title="Advanced Approval">
+    Add manual steps for groups >10 guests.
+
+    <Steps>
+      <Step title="Enable Approval">
+        Go to **Workflows > Reservations** and toggle **Require Approval**.
+      </Step>
+      <Step title="Set Threshold">
+        Enter `10` for group size threshold.
+      </Step>
+    </Steps>
+
+    ```json
+    {
+      "approvalRequired": true,
+      "threshold": 10,
+      "approvers": ["manager@grandhotel.com"]
+    }
+    ```
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="info">
+  Test workflow changes in a staging environment before applying to production.
+</Callout>
+
+These configurations ensure Bookengo fits seamlessly into your hotel operations, reducing manual work and boosting guest satisfaction. Review settings quarterly to accommodate seasonal changes.

@@ -1,0 +1,133 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Bookengo Documentation
+  license:
+    name: MIT
+servers:
+  - url: http://petstore.swagger.io/v1
+paths:
+  /shuttles:
+    get:
+      summary: Retrieve a list of available shuttles for hotel guest transportation. This endpoint helps managers view all shuttle options and plan guest transfers efficiently.
+      operationId: listShuttles
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: A paged array of available shuttles
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shuttles'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new shuttle entry for guest transportation scheduling. Use this when adding new vehicles or transport options for hotel guests.
+      operationId: createShuttles
+      responses:
+        201:
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /shuttles/{shuttleId}:
+    get:
+      summary: Retrieve detailed information about a specific shuttle. Hotel managers use this to review shuttle capacity, schedule, and assigned routes.
+      operationId: showShuttleById
+      parameters:
+        - name: shuttleId
+          in: path
+          required: true
+          description: The id of the shuttle to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shuttles'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /shuttle-routes:
+    get:
+      summary: List all shuttle routes currently configured for guest transportation. This allows hotel managers to understand available paths and optimize scheduling.
+      operationId: listShuttleRoutes
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: A paged array of shuttle routes
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shuttles'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Shuttle:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tag:
+          type: string
+    Shuttles:
+      type: array
+      items:
+        $ref: '#/components/schemas/Shuttle'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
